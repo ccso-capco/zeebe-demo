@@ -1,8 +1,0 @@
-bradesco/demo/springboot1/Controller.java
- bradesco.demo.springboot1.Controller
-bradesco/demo/springboot1/Consumer.java
- bradesco.demo.springboot1.Consumer
-bradesco/demo/springboot1/Application.java
- bradesco.demo.springboot1.Application
-bradesco/demo/springboot1/Producer.java
- bradesco.demo.springboot1.Producer
