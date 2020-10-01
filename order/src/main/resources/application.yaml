@@ -1,12 +1,42 @@
+server:
+  port: 7080
+
 spring:
-  kafka:
-    consumer:
-      bootstrap-servers: kafka-service:9092
-      group-id: order
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    producer:
-      bootstrap-servers: kafka-service:9092
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: payment-events
+          content-type: application/json
+        output:
+          destination: payment-commands
+          content-type: application/json
+      kafka:
+        binder:
+          brokers: localhost:9092
+          zkNodes: localhost:2181
+
+#  kafka:
+#    consumer:
+#      bootstrap-servers: localhost:9092
+#      group-id: order
+#      auto-offset-reset: earliest
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#    producer:
+#      bootstrap-servers: localhost:9092
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+zeebe:
+  brokerContactPoint: localhost:26500
+
