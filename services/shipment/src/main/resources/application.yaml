@@ -1,0 +1,18 @@
+server:
+  port: 7082
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: order-flow
+          content-type: application/json
+          group: shipment
+        output:
+          destination: order-flow
+          content-type: application/json
+      kafka:
+        binder:
+          brokers: kafka:9092
+          zkNodes: zookeeper:2181

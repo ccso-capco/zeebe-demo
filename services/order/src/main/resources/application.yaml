@@ -1,0 +1,31 @@
+server:
+  port: 7080
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: order-flow
+          content-type: application/json
+        output:
+          destination: order-flow
+          content-type: application/json
+      kafka:
+        binder:
+          brokers: kafka:9092
+          zkNodes: zookeeper:2181
+          autoCreateTopics: true
+
+zeebe:
+  brokerContactPoint: zeebe:26500
+
