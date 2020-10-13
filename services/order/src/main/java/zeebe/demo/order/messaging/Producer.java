@@ -1,9 +1,5 @@
-package bradesco.demo.order.messaging;
+package zeebe.demo.order.messaging;
 
-import bradesco.demo.order.messaging.model.Message;
-import bradesco.demo.order.messaging.model.OrderCompletedEventPayload;
-import bradesco.demo.order.messaging.model.RetrievePaymentCommandPayload;
-import bradesco.demo.order.messaging.model.ShipGoodsCommandPayload;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +8,10 @@ import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
+import zeebe.demo.order.messaging.model.Message;
+import zeebe.demo.order.messaging.model.OrderCompletedEventPayload;
+import zeebe.demo.order.messaging.model.RetrievePaymentCommandPayload;
+import zeebe.demo.order.messaging.model.ShipGoodsCommandPayload;
 
 @Component
 @RequiredArgsConstructor

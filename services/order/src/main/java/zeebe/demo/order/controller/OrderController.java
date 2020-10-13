@@ -1,9 +1,5 @@
-package bradesco.demo.order.controller;
+package zeebe.demo.order.controller;
 
-import bradesco.demo.order.controller.request.OrderRequest;
-import bradesco.demo.order.entity.Order;
-import bradesco.demo.order.flow.OrderFlowContext;
-import bradesco.demo.order.service.OrderService;
 import io.zeebe.client.ZeebeClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import zeebe.demo.order.controller.request.OrderRequest;
+import zeebe.demo.order.entity.Order;
+import zeebe.demo.order.flow.OrderFlowContext;
+import zeebe.demo.order.service.OrderService;
 
 @Slf4j
 @RequiredArgsConstructor

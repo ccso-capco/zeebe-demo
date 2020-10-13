@@ -1,7 +1,7 @@
-package bradesco.demo.order.repository;
+package zeebe.demo.order.repository;
 
-import bradesco.demo.order.entity.Order;
 import org.springframework.data.repository.CrudRepository;
+import zeebe.demo.order.entity.Order;
 
 public interface OrderRepository extends CrudRepository<Order, Long> {
 }

@@ -1,8 +1,5 @@
-package bradesco.demo.order.messaging;
+package zeebe.demo.order.messaging;
 
-import bradesco.demo.order.messaging.model.GoodsShippedEventPayload;
-import bradesco.demo.order.messaging.model.Message;
-import bradesco.demo.order.messaging.model.PaymentReceivedEventPayload;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.zeebe.client.ZeebeClient;
@@ -13,6 +10,9 @@ import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.stereotype.Component;
+import zeebe.demo.order.messaging.model.GoodsShippedEventPayload;
+import zeebe.demo.order.messaging.model.Message;
+import zeebe.demo.order.messaging.model.PaymentReceivedEventPayload;
 
 @Slf4j
 @Component

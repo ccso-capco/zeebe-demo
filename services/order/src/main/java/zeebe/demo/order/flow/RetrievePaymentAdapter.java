@@ -1,26 +1,21 @@
-package bradesco.demo.order.flow;
-
-import bradesco.demo.order.entity.Order;
-import bradesco.demo.order.messaging.model.RetrievePaymentCommandPayload;
-import bradesco.demo.order.messaging.Producer;
-import bradesco.demo.order.repository.OrderRepository;
-import bradesco.demo.order.service.OrderService;
-import java.time.Duration;
-import java.util.Collections;
-import java.util.UUID;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+package zeebe.demo.order.flow;
 
 import io.zeebe.client.ZeebeClient;
 import io.zeebe.client.api.response.ActivatedJob;
 import io.zeebe.client.api.worker.JobClient;
 import io.zeebe.client.api.worker.JobHandler;
 import io.zeebe.client.api.worker.JobWorker;
+import java.time.Duration;
+import java.util.Collections;
+import java.util.UUID;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+import zeebe.demo.order.entity.Order;
+import zeebe.demo.order.messaging.Producer;
+import zeebe.demo.order.messaging.model.RetrievePaymentCommandPayload;
+import zeebe.demo.order.service.OrderService;
 
 @RequiredArgsConstructor
 @Component

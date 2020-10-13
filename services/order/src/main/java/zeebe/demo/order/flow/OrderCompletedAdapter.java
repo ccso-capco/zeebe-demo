@@ -1,7 +1,5 @@
-package bradesco.demo.order.flow;
+package zeebe.demo.order.flow;
 
-import bradesco.demo.order.messaging.model.OrderCompletedEventPayload;
-import bradesco.demo.order.messaging.Producer;
 import io.zeebe.client.ZeebeClient;
 import io.zeebe.client.api.response.ActivatedJob;
 import io.zeebe.client.api.worker.JobClient;
@@ -12,6 +10,8 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import zeebe.demo.order.messaging.Producer;
+import zeebe.demo.order.messaging.model.OrderCompletedEventPayload;
 
 @RequiredArgsConstructor
 @Component

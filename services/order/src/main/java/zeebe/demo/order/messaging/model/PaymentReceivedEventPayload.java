@@ -1,4 +1,4 @@
-package bradesco.demo.order.messaging.model;
+package zeebe.demo.order.messaging.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

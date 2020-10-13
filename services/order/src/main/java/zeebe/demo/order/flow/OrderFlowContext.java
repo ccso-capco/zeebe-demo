@@ -1,4 +1,4 @@
-package bradesco.demo.order.flow;
+package zeebe.demo.order.flow;
 
 import java.util.HashMap;
 import java.util.Map;

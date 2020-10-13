@@ -1,4 +1,4 @@
-package bradesco.demo.order.entity;
+package zeebe.demo.order.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Generated;
 
 @Entity(name="OrderEntity")
 @Data
