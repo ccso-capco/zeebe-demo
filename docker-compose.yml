@@ -65,16 +65,26 @@ services:
     container_name: order
     build: ./services/order
     ports:
-      - "7080:7080"
+      - "7080:8080"
+    depends_on:
+      - zeebe
 
   payment:
     container_name: payment
     build: ./services/payment
     ports:
-      - "7081:7081"
+      - "7081:8080"
+    depends_on:
+      - zeebe
+
+  payment-provider:
+    container_name: payment-provider
+    build: ./services/payment-provider
+    ports:
+      - "7083:8080"
 
   shipment:
     container_name: shipment
     build: ./services/shipment
     ports:
-      - "7082:7082"
+      - "7082:8080"

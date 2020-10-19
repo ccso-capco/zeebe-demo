@@ -19,13 +19,7 @@ dependencyManagement {
 }
 
 dependencies {
-    implementation 'io.zeebe:zeebe-client-java:0.22.1'
-
-    implementation 'com.netflix.hystrix:hystrix-core:1.5.12'
-
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.cloud:spring-cloud-stream'
-    implementation 'org.springframework.cloud:spring-cloud-stream-binder-kafka'
 
     compileOnly 'org.projectlombok:lombok:1.18.12'
     annotationProcessor 'org.projectlombok:lombok:1.18.12'

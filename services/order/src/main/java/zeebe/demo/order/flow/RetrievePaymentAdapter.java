@@ -23,13 +23,13 @@ public class RetrievePaymentAdapter implements JobHandler {
 
   private final Producer messageSender;
   private final OrderService orderService;
-  private final ZeebeClient zeebe;
+  private final ZeebeClient zeebeClient;
 
   private JobWorker subscription;
 
   @PostConstruct
   public void subscribe() {
-    subscription = zeebe.newWorker()
+    subscription = zeebeClient.newWorker()
         .jobType("retrieve-payment")
         .handler(this)
         .timeout(Duration.ofMinutes(1))

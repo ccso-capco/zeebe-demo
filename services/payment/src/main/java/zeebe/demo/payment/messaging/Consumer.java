@@ -1,5 +1,7 @@
 package zeebe.demo.payment.messaging;
 
+import io.zeebe.client.ZeebeClient;
+import java.util.Collections;
 import zeebe.demo.payment.messaging.model.Message;
 import zeebe.demo.payment.messaging.model.PaymentReceivedEventPayload;
 import zeebe.demo.payment.messaging.model.RetrievePaymentCommandPayload;
@@ -17,22 +19,15 @@ import org.springframework.stereotype.Component;
 @EnableBinding(Sink.class)
 public class Consumer {
 
-  private final Producer producer;
-
-  private final ObjectMapper objectMapper;
+  private final ZeebeClient zeebeClient;
 
   @StreamListener(target = Sink.INPUT,
       condition="(headers['type']?:'')=='RetrievePaymentCommand'")
-  public void onRetrievePaymentCommand(String messageJson) throws IOException {
-    Message<RetrievePaymentCommandPayload> message = objectMapper
-        .readValue(messageJson, new TypeReference<Message<RetrievePaymentCommandPayload>>() {
-        });
-    RetrievePaymentCommandPayload retrievePaymentCommand = message.getData();
-
-    PaymentReceivedEventPayload payload = PaymentReceivedEventPayload.builder()
-        .orderId(retrievePaymentCommand.getOrderId())
-        .build();
-
-    producer.sendPaymentReceivedEvent(payload, message.getCorrelationId());
+  public void onRetrievePaymentCommand(String message) throws IOException {
+    zeebeClient.newCreateInstanceCommand()
+        .bpmnProcessId("payment-rest")
+        .latestVersion()
+        .variables(Collections.singletonMap("RetrievePaymentCommand", message))
+        .send().join();
   }
 }

@@ -8,15 +8,23 @@ https://github.com/berndruecker/flowing-retail
 ## Workflow
 
 The workflow simulates a very simple order fulfillment system, with the business logic separated into 3 different services:
-![Workflow](docs/workflow.png)
+![Workflow](docs/workflow-highlevel.png)
 
-## Implementation details
-
-* The `order service` is the one responsible for orchestrating the flow end-to-end.
-* Currently only the `order service` interacts with Zeebe.
-* The bpmn diagram for the workflow lives in the `order service` and gets automatically deployed to Zeebe once the service starts.
+## Components
 
 ![Components](docs/components.png)
+
+## Workflow details
+
+![Workflow](docs/workflow-details.png)
+1. Client calls REST endpoint from order service to start the order flow.
+2. Order service creates a new workflow instance in Zeebe.
+3. Zeebe triggers the next step in the flow; order service sends RetrievePaymentCommand message to Kafka.
+4. Order service marks current step as completed in Zeebe.
+5. Payment service receives RetrievePaymentCommand message from Kafka and triggers a new workflow instance in Zeebe.
+6. Zeebe triggers the next step in the flow; payment service calls REST endpoint in payment provider; payment service marks current step as completed in Zeebe.
+7. Zeebe triggers the next step in the flow; payment service sends PaymentReceivedEvent message to Kafka; payment service marks current step as completed in Zeebe.
+8. Payment service receives PaymentReceivedEvent message from Kafka and marks current step as completed in Zeebe.
 
 ### Tech stack
 

@@ -32,10 +32,8 @@ public class Consumer {
     zeebe.newPublishMessageCommand()
         .messageName(message.getType())
         .correlationKey(message.getCorrelationId())
-        .variables(Collections.singletonMap("paymentInfo", "YeahWeCouldAddSomething"))
+        .variables(Collections.singletonMap("PaymentReceivedEvent", messageJson))
         .send().join();
-
-    log.info("Received event with correlation id " + message.getCorrelationId());
   }
 
   @StreamListener(target = Sink.INPUT, condition = "(headers['type']?:'')=='GoodsShippedEvent'")
@@ -46,9 +44,7 @@ public class Consumer {
     zeebe.newPublishMessageCommand()
         .messageName(message.getType())
         .correlationKey(message.getCorrelationId())
-        .variables(Collections.singletonMap("goodsInfo", "YeahWeCouldAddSomething"))
+        .variables(Collections.singletonMap("GoodsShippedEvent", messageJson))
         .send().join();
-
-    log.info("Received event with correlation id " + message.getCorrelationId());
   }
 }

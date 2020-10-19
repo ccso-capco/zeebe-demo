@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1hvsvjo" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Zeebe Modeler" exporterVersion="0.10.0">
+  <bpmn:process id="payment-rest" name="payment-rest" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Payment requested">
+      <bpmn:outgoing>SequenceFlow_1r3ncia</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_1wp4s35" name="Payment&#10;received">
+      <bpmn:incoming>Flow_19zxida</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1796qrk" sourceRef="charge-creditcard" targetRef="Activity_0j6y2ps" />
+    <bpmn:sequenceFlow id="SequenceFlow_1r3ncia" sourceRef="StartEvent_1" targetRef="charge-creditcard" />
+    <bpmn:serviceTask id="charge-creditcard" name="Charge credit card">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="charge-creditcard" retries="2" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1r3ncia</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1796qrk</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_0j6y2ps" name="Send event: payment received">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="payment-received" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1796qrk</bpmn:incoming>
+      <bpmn:outgoing>Flow_19zxida</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_19zxida" sourceRef="Activity_0j6y2ps" targetRef="EndEvent_1wp4s35" />
+  </bpmn:process>
+  <bpmn:error id="Error_1a0de1k" name="Not Available" errorCode="503" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="payment-rest">
+      <bpmndi:BPMNEdge id="SequenceFlow_1r3ncia_di" bpmnElement="SequenceFlow_1r3ncia">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="260" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1796qrk_di" bpmnElement="SequenceFlow_1796qrk">
+        <di:waypoint x="360" y="117" />
+        <di:waypoint x="406" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_19zxida_di" bpmnElement="Flow_19zxida">
+        <di:waypoint x="506" y="117" />
+        <di:waypoint x="553" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="173" y="142" width="49" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0r97e7w_di" bpmnElement="charge-creditcard">
+        <dc:Bounds x="260" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0j6y2ps_di" bpmnElement="Activity_0j6y2ps">
+        <dc:Bounds x="406" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1wp4s35_di" bpmnElement="EndEvent_1wp4s35">
+        <dc:Bounds x="553" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="550" y="142" width="44" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

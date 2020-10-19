@@ -15,7 +15,7 @@ done
 
 docker-compose down
 
-if [ -z ${REMOVE_VOLUMES} ]
+if [ "${REMOVE_VOLUMES}" == "YES" ]; then
     docker volume rm zeebe_data
     docker volume rm zeebe_elasticsearch_data
 fi
